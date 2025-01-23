@@ -12,10 +12,10 @@ const Header = () => {
                </div>
 
                <div className="flex items-center gap-3">
-                   <Link to='/' className="text-sm md:text-base font-medium text-black/80 hover:text-black">
+                   <Link to='/login' className="text-sm md:text-base font-medium text-black/80 hover:text-black">
                        Log in
                    </Link>
-                   <Link to='/' className="text-sm md:text-base font-medium text-black/80 hover:text-black">
+                   <Link to='/register' className="text-sm md:text-base font-medium text-black/80 hover:text-black">
                        Register
                    </Link>
                </div>
