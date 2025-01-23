@@ -6,9 +6,13 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {Provider} from "react-redux";
 import {store} from "./store.ts";
 import {Toaster} from "react-hot-toast";
+import LoginPage from "./Pages/LoginPage.tsx";
+import RegisterPage from "./Pages/RegisterPage.tsx";
 
 const router = createBrowserRouter([
-    {path: '/', element: <App/>, errorElement: <div>Error</div>}
+    {path: '/', element: <App/>, errorElement: <div>Error</div>},
+    {path: '/login', element: <LoginPage/>, errorElement: <div>Error</div>},
+    {path: '/register', element: <RegisterPage/>, errorElement: <div>Error</div>},
 ])
 
 createRoot(document.getElementById('root')!).render(
