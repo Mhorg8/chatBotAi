@@ -12,6 +12,7 @@ interface States {
   searchHistory: SearchItem[];
   loading: boolean;
   showResults: boolean;
+  currentUserId: string | null;
 }
 
 const initialState: States = {
@@ -21,6 +22,7 @@ const initialState: States = {
   searchHistory: [],
   loading: false,
   showResults: false,
+  currentUserId: null,
 };
 
 const searchSlice = createSlice({
@@ -68,9 +70,21 @@ const searchSlice = createSlice({
       state.loading = false;
       state.searchResult = "";
     },
+    setNewUserId: (state, action: PayloadAction<string | null>) => {
+      if (action.payload === null) {
+        return;
+      } else {
+        state.currentUserId = action.type;
+      }
+    },
   },
 });
 
-export const { setSearchQuery, onSearch, setLoading, addNewChat } =
-  searchSlice.actions;
+export const {
+  setSearchQuery,
+  onSearch,
+  setLoading,
+  addNewChat,
+  setNewUserId,
+} = searchSlice.actions;
 export default searchSlice.reducer;

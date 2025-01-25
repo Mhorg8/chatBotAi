@@ -6,10 +6,13 @@ import { useLoginUser } from "../hook/useLogin";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../lib/reduxHook";
 import { toggleLoginUser } from "../lib/redux/theme/themeSlice";
+import { setNewUserId } from "../lib/redux/search/serchSlice";
 
 const LoginForm = () => {
   const router = useNavigate();
   const dispatch = useAppDispatch();
+
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -19,9 +22,12 @@ const LoginForm = () => {
 
       if (response) {
         dispatch(toggleLoginUser(response));
+        dispatch(setNewUserId(response));
+
         setTimeout(() => {
           router("/");
         }, 3000);
+        
       }
     } catch (error) {
       console.error(error);

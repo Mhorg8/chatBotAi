@@ -18,6 +18,7 @@ export async function useLoginUser(formData: FormData) {
 
     if (response.status === 200) {
       toast.success(data.message);
+      // return user id
       return data.userId;
     } else {
       toast.error(data.message);
