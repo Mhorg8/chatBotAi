@@ -1,41 +1,17 @@
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../lib/reduxHook";
-import { toggleLoginUser } from "../lib/redux/theme/themeSlice";
+import NavMenu from "./NavMenu";
 
 const Header = () => {
-  const isLogin = useAppSelector((state) => state.theme.isLogin);
-  const dispatch = useAppDispatch();
   return (
-    <div className="w-full  shadow-md bg-gray-100 py-4 ">
-      <div className="container flex justify-between items-center">
-        {/* logo */}
-        <div>
-          <Link to="/" className="text-2xl font-bold italic">
-            SinAi
-          </Link>
-        </div>
+    <div className="w-full bg-zinc-600 py-4 px-4 shadow-white  z-50">
+      <div className="flex items-center justify-between w-full h-full">
+        <Link to="/" className="text-2xl text-dar font-black">
+          CHAT.AI
+        </Link>
+        <NavMenu />
 
-        <div>
-          {isLogin ? (
-            <button onClick={() => dispatch(toggleLoginUser(""))}>
-              Log out
-            </button>
-          ) : (
-            <div className="flex items-center gap-3">
-              <Link
-                to="/login"
-                className="text-sm md:text-base font-medium text-black/80 hover:text-black"
-              >
-                Log in
-              </Link>
-              <Link
-                to="/register"
-                className="text-sm md:text-base font-medium text-black/80 hover:text-black"
-              >
-                Register
-              </Link>
-            </div>
-          )}
+        <div className="flex items-center gap-4">
+          <button></button>
         </div>
       </div>
     </div>

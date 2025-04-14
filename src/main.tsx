@@ -1,25 +1,20 @@
-import {StrictMode} from 'react'
-import {createRoot} from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import {Provider} from "react-redux";
-import {store} from "./store.ts";
-import {Toaster} from "react-hot-toast";
-import LoginPage from "./Pages/LoginPage.tsx";
-import RegisterPage from "./Pages/RegisterPage.tsx";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App.tsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Layout from "./layout.tsx";
 
 const router = createBrowserRouter([
-    {path: '/', element: <App/>, errorElement: <div>Error</div>},
-    {path: '/login', element: <LoginPage/>, errorElement: <div>Error</div>},
-    {path: '/register', element: <RegisterPage/>, errorElement: <div>Error</div>},
-])
+  {
+    path: "/",
+    element: <Layout />,
+    children: [{ path: "/", element: <App /> }],
+  },
+]);
 
-createRoot(document.getElementById('root')!).render(
-    <StrictMode>
-        <Provider store={store}>
-            <RouterProvider router={router}/>
-            <Toaster position="bottom-right"/>
-        </Provider>
-    </StrictMode>,
-)
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <RouterProvider router={router} />
+  </StrictMode>
+);
