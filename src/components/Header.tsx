@@ -11,7 +11,12 @@ const Header = () => {
         <NavMenu />
 
         <div className="flex items-center gap-4">
-          <button></button>
+          <Link
+            to="/login"
+            className="text-white font-medium cursor-pointer text-base"
+          >
+            login
+          </Link>
         </div>
       </div>
     </div>

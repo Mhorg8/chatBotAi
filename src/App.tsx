@@ -33,7 +33,6 @@ function App() {
 
         setAnswer(formatted);
         dispatch(ADD_NEW_PROMPT(prompt));
-
       } else {
         alert("Something went wrong, check your location");
       }
@@ -48,7 +47,7 @@ function App() {
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    search(); // call search directly
+    search();
   }
 
   function searchByEnterKey(e: React.KeyboardEvent<HTMLInputElement>) {

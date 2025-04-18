@@ -18,5 +18,10 @@
 }
 
 @layer components {
-  
+  .form__input {
+    /* w-full bg-stone-200 focus:outline-0 focus:border-0 py-2 px-3 rounded-md */
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+  }
 }

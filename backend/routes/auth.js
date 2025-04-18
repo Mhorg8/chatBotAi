@@ -12,7 +12,7 @@ router.post("/register", async (req, res) => {
 
     // Validate inputs
     if (!email || !password) {
-      return res.status(400).json({
+      return res.status(200).json({
         message: "Email and password are required.",
         isSuccess: false,
         data: null,
@@ -22,7 +22,7 @@ router.post("/register", async (req, res) => {
     // Check if user exists
     const isExist = await User.findOne({ email });
     if (isExist) {
-      return res.status(409).json({
+      return res.status(200).json({
         message: "User already exists.",
         isSuccess: false,
         data: null,
@@ -32,7 +32,7 @@ router.post("/register", async (req, res) => {
     // Validate password
     const isValidPassword = passwordRegex.test(password);
     if (!isValidPassword) {
-      return res.status(400).json({
+      return res.status(200).json({
         message:
           "Password must be at least 6 characters and contain at least one letter and one number.",
         isSuccess: false,
@@ -46,7 +46,7 @@ router.post("/register", async (req, res) => {
     // Create user
     const newUser = await User.create({ email, password: hashedPassword });
 
-    res.status(201).json({
+    res.status(200).json({
       message: "User created successfully",
       isSuccess: true,
       data: newUser,
