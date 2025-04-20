@@ -13,7 +13,11 @@ interface responseType {
   message: string;
 }
 
-const LoginForm = () => {
+interface Props {
+  isLoginForm: boolean;
+}
+
+const LoginForm = ({ isLoginForm }: Props) => {
   const [response, setResponse] = useState<responseType>();
   const router = useNavigate();
 
@@ -31,7 +35,6 @@ const LoginForm = () => {
   }));
 
   async function register(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const req = Object.fromEntries(formData.entries());
 
@@ -41,7 +44,6 @@ const LoginForm = () => {
         req
       );
       setResponse(response.data);
-      //   localStorage.setItem("token", JSON.stringify(response.data.data));
       setTimeout(() => {
         router("/");
       }, 2000);
@@ -50,9 +52,37 @@ const LoginForm = () => {
     }
   }
 
+  async function login(e: FormEvent<HTMLFormElement>) {
+    const formData = new FormData(e.currentTarget);
+    const req = Object.fromEntries(formData.entries());
+
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/auth/login",
+        req
+      );
+
+      if (response.data.isSuccess) {
+        setResponse(response.data);
+        setTimeout(() => {
+          localStorage.setItem("token", JSON.stringify(response.data.data));
+          router("/");
+        }, 2000);
+      }
+    } catch (error) {
+      console.error(error, "Something went wrong");
+    }
+  }
+
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    isLoginForm ? login(e) : register(e);
+  }
+
   return (
     <div>
-      <form onSubmit={register} className="mt-10 flex-1">
+      <form onSubmit={handleSubmit} className="mt-10 flex-1">
         <div className="flex flex-col gap-3">
           <TextField
             name="email"
@@ -67,17 +97,19 @@ const LoginForm = () => {
             type="password"
           />
           <div className="flex items-center gap-2 text-sm ">
-            <p>Already have an account?</p>
+            <p>
+              {isLoginForm ? "Create an account" : "Already have an account?"}
+            </p>
             <Link
-              to="/login"
+              to={isLoginForm ? "/register" : "/login"}
               className="underline text-purple-500 font-semibold"
             >
-              Login
+              {isLoginForm ? "Register" : "Login"}
             </Link>
           </div>
           <hr className="text-zinc-400 mb-5" />
           <ColorButton type="submit" size="large" fullWidth variant="outlined">
-            Register
+            {isLoginForm ? "Login" : " Register"}
           </ColorButton>
         </div>
       </form>

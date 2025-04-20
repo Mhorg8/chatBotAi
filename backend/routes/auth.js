@@ -60,3 +60,46 @@ router.post("/register", async (req, res) => {
     });
   }
 });
+
+router.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(200).json({
+        message: "Email or Passowrd is required.",
+        isSuccess: false,
+        data: null,
+      });
+    }
+
+    const isExist = await User.findOne({ email });
+
+    if (!isExist) {
+      return res.status(200).json({
+        message: `User with ${email} not founded`,
+        isSuccess: false,
+        data: null,
+      });
+    }
+
+    const isValidPassword = await bcrypt.compare(password, isExist.password);
+
+    if (!isValidPassword) {
+      return res.status(200).json({
+        message: "Passowrd is not valid.",
+        data: null,
+        isSuccess: false,
+      });
+    }
+
+    return res
+      .status(200)
+      .json({ message: `Wellcome ${email}.`, data: isExist, isSuccess: true });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ message: "Something went wrong on server", error });
+  }
+});

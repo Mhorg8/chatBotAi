@@ -1,7 +1,6 @@
 import Header from "../components/Header";
 import LoginForm from "../components/LoginForm";
 
-
 const RegisterPage = () => {
   return (
     <div>
@@ -23,7 +22,7 @@ const RegisterPage = () => {
               </h2>
               <p>Create an account for access to all featuers.</p>
             </div>
-            <LoginForm />
+            <LoginForm isLoginForm={false} />
             <div className="text-center">
               <p className="text-sm">Privacy and police</p>
             </div>
