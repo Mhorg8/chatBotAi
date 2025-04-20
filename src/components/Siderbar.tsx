@@ -1,9 +1,11 @@
 import { FaRegEdit } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
+import { useSession } from "../hooks/useSession";
 
 const Siderbar = () => {
   const propmts = useSelector((state: RootState) => state.prompt.propmpts);
+  const { session } = useSession();
 
   return (
     <div className="col-span-3 border-e border-zinc-900/70   w-full">
@@ -15,27 +17,36 @@ const Siderbar = () => {
           New chat
         </h2>
       </div>
-      <div className="bg-black/80 h-full">
+      <div
+        className={`${session ? "" : "blur-3xl "} h-full bg-black/80 relative`}
+      >
         <h3 className="px-4 py-5  text-2xl uppercase font-semibold text-white">
           history
         </h3>
-
-        <ul className="  flex flex-col justify-start items-start h-fit overflow-y-auto">
-          {propmts &&
-            propmts.map((item, index) => {
-              return (
-                <li
-                  key={index}
-                  className="flex items-center justify-between w-full h-fit text-white  hover:text-white bg-black/20 hover:bg-black/40 px-4 py-5 hoverEffect cursor-pointer"
-                >
-                  <p className="first-letter:capitalize">{item}</p>
-                  <button>
-                    <FaRegEdit size={20} cursor="pointer" />
-                  </button>
-                </li>
-              );
-            })}
-        </ul>
+        {session ? (
+          <ul className="flex flex-col justify-start items-start h-fit overflow-y-auto ">
+            {propmts &&
+              propmts.map((item, index) => {
+                return (
+                  <li
+                    key={index}
+                    className="flex items-center justify-between w-full h-fit text-white  hover:text-white bg-black/20 hover:bg-black/40 px-4 py-5 hoverEffect cursor-pointer"
+                  >
+                    <p className="first-letter:capitalize">{item}</p>
+                    <button>
+                      <FaRegEdit size={20} cursor="pointer" />
+                    </button>
+                  </li>
+                );
+              })}
+          </ul>
+        ) : (
+          <div className="absolute top-1/3 -translate-y-1/3 left-1/5 -translate-x-1/5">
+            <p className="text-white text-xl font-semibold uppercase">
+              Login for access to history
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
