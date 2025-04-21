@@ -11,8 +11,8 @@ const NavMenu = () => {
             isPending
               ? ""
               : isActive
-              ? "underline"
-              : "hover:underline hoverEffect"
+              ? "underline hover:text-purple-400"
+              : "hover:underline hover:text-purple-400 hoverEffect"
           }
           to={item.path}
           key={item.id}

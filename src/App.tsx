@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useState } from "react";
-import { LuSearch } from "react-icons/lu";
+import { IoIosSend } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 
 import main from "./gemini";
@@ -53,7 +53,13 @@ function App() {
   function searchByEnterKey(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.code === "Enter") {
       e.preventDefault();
-      search();
+
+      if (prompt.length === 0) {
+        alert("Please enter a prompt");
+        return;
+      } else {
+        search();
+      }
     }
   }
 
@@ -92,10 +98,15 @@ function App() {
             className="w-full bg-transparent border-0 outline-0 py-3 px-5"
           />
           <button
+            disabled={loading || prompt.length === 0}
             type="submit"
-            className="flex items-center justify-center p-2 absolute top-1 cursor-pointer right-3 text-black"
+            className={`${
+              loading || prompt.length === 0
+                ? "cursor-not-allowed"
+                : "cursor-pointer"
+            } flex items-center justify-center p-2 absolute top-1 right-3 text-black `}
           >
-            <LuSearch size={24} />
+            <IoIosSend size={24} />
           </button>
         </form>
       </div>

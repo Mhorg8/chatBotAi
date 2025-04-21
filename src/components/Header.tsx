@@ -18,7 +18,10 @@ const Header = () => {
   return (
     <div className="w-full bg-zinc-900 py-4 px-4 border-b border-white/20 z-50">
       <div className="flex items-center justify-between w-full h-full">
-        <Link to="/" className="text-2xl text-white font-black border border-white rounded-md p-0.5">
+        <Link
+          to="/"
+          className="text-2xl text-white font-black border border-purple-500 hover:bg-white hover:text-purple-500   transition-all duration-300 rounded-md p-0.5"
+        >
           CHAT.AI
         </Link>
         <NavMenu />
@@ -54,7 +57,7 @@ const Header = () => {
           ) : (
             <Link
               to="/login"
-              className="text-white font-medium cursor-pointer text-base"
+              className="uppercase text-2xl text-white font-black border border-purple-500 hover:bg-white hover:text-purple-500   transition-all duration-300 rounded-md p-0.5"
             >
               login
             </Link>
