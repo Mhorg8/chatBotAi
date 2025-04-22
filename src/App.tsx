@@ -64,7 +64,7 @@ function App() {
   }
 
   return (
-    <div className="col-span-9 bg-zinc-900 flex flex-col items-center justify-center h-full w-full">
+    <div className="col-span-12 md:col-span-9 bg-zinc-900 flex flex-col items-center justify-center h-full w-full">
       <div className="min-h-[70dvh] w-[88dvh] bg-zinc-800/70 rounded-xl p-2 px-2 shadow-white shadow-sm">
         <div className="w-full max-h-[90%] h-[600px] flex flex-col-reverse mb-3 rounded-lg justify-start items-end p-3 overflow-y-auto">
           {loading ? (

@@ -8,7 +8,7 @@ const Siderbar = () => {
   const { session } = useSession();
 
   return (
-    <div className="col-span-3 border-e border-zinc-900/70   w-full">
+    <div className="hidden md:col-span-3 border-e border-zinc-900/70   w-full">
       <div className="flex items-center gap-2 bg-zinc-900 py-10 px-4">
         <button className="cursor-pointer text-white">
           <FaRegEdit size={28} />

@@ -4,10 +4,16 @@ import { useSession } from "../hooks/useSession";
 import { Avatar } from "@mui/material";
 import { deepPurple, purple } from "@mui/material/colors";
 import { useState } from "react";
+import { LuLogIn, LuMenu, LuX } from "react-icons/lu";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
 const Header = () => {
   const { session, setSession } = useSession();
   const [isDropdownOpen, setIsDropdownOpen] = useState<Boolean>(false);
+  const isNavmenuOpen = useSelector(
+    (state: RootState) => state.prompt.isNavmenuOpen
+  );
 
   function handleRemoveSession() {
     localStorage.removeItem("token");
@@ -55,12 +61,18 @@ const Header = () => {
               </button>
             </div>
           ) : (
-            <Link
-              to="/login"
-              className="uppercase text-2xl text-white font-black border border-purple-500 hover:bg-white hover:text-purple-500   transition-all duration-300 rounded-md p-0.5"
-            >
-              login
-            </Link>
+            <div className="flex items-center gap-4">
+              <Link
+                to="/login"
+                className="p-2 rounded-md border border-purple-500 text-white hover:text-purple-500 hover:bg-white hoverEffect"
+              >
+                <LuLogIn size={24} />
+              </Link>
+
+              <button className="p-2 rounded-md border border-purple-500 text-white hover:text-purple-500 hover:bg-white hoverEffect cursor-pointer">
+                {isNavmenuOpen ? <LuX size={24} /> : <LuMenu size={24} />}
+              </button>
+            </div>
           )}
         </div>
       </div>
