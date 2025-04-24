@@ -6,7 +6,7 @@ import main from "./gemini";
 import Loader from "./components/Loader";
 import { RootState } from "./store/store";
 import { ADD_NEW_PROMPT } from "./store/promptSlice";
-import { LuMic } from "react-icons/lu";
+import { LuBrain, LuLamp, LuLaptop, LuMic } from "react-icons/lu";
 import { Conversation } from "./types";
 
 function App() {
@@ -87,11 +87,45 @@ function App() {
           {loading ? (
             <Loader />
           ) : (
-            <div className="min-w-[100px] h-fit max-w-fit ">
+            <div className="min-w-[100px] h-full w-full ">
               {!havePrompt ? (
-                <p className="bg-white  p-2 rounded-md max-w-fit min-w-[100px] shadow-lg">
-                  چطور می تونم کمک کنم؟
-                </p>
+                <div className="flex flex-col items-end gap-3 justify-between h-full w-full flex-1">
+                  <div className="flex-1 grid grid-cols-3 w-full h-full justify-center items-center gap-4">
+                    <div className="bg-white justify-between w-full p-2 rounded-md border border-zinc-400 h-[140px]">
+                      <div className="flex items-center justify-between w-full h-fit">
+                        <h4>make idea</h4>
+                        <LuBrain size={20} />
+                      </div>
+
+                      <p className="text-sm text-zinc-700 h-full flex items-end">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing.
+                      </p>
+                    </div>
+                    <div className="bg-white h-fit w-full p-2 rounded-md border border-zinc-400">
+                      <div className="flex items-center justify-between w-full">
+                        <h4>make idea</h4>
+                        <LuBrain size={20} />
+                      </div>
+
+                      <p className="text-sm text-zinc-700">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing.
+                      </p>
+                    </div>
+                    <div className="bg-white h-fit w-full p-2 rounded-md border border-zinc-400">
+                      <div className="flex items-center justify-between w-full">
+                        <h4>make idea</h4>
+                        <LuBrain size={20} />
+                      </div>
+
+                      <p className="text-sm text-zinc-700">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing.
+                      </p>
+                    </div>
+                  </div>
+                  <p className="bg-white  p-2 rounded-md max-w-fit min-w-[100px] shadow-lg">
+                    چطور می تونم کمک کنم؟
+                  </p>
+                </div>
               ) : (
                 <div
                   className=" text-black shadow-lg bg-white p-2 rounded-md"
