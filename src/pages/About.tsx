@@ -16,20 +16,29 @@ const AboutPage = () => {
   return (
     <div className="font-roboto-bold overflow-hidden ">
       <Header />
-      <div className="w-full h-[calc(100dvh-73px)] bg-zinc-900 flex flex-col items-start justify-center">
+      <div className="w-full h-[calc(100dvh-73px)] bg-gray flex flex-col items-start justify-center">
         <motion.div
           className="container mx-auto"
           variants={animation}
           initial="initial"
           animate="animate"
-          transition={{ duration: 0.5  , type: "spring", bounce: 0.2 , stiffness: 100 }}
+          transition={{
+            duration: 0.5,
+            type: "spring",
+            bounce: 0.2,
+            stiffness: 100,
+          }}
         >
-          <h1 className="text-white font-extrabold text-7xl">ABOUT PROJECT</h1>
+          <h1 className="mb-3 text-white font-extrabold text-7xl">
+            درباره پروژه
+          </h1>
           <p className="text-white text-lg">
-            This project was created for Azad University, but you can also use
-            it for daily use.{" "}
+            این پروژه برای دانشگاه آزاد ساخنه شده ولی می توانم از آن برای
+            استفاده روزانه هم استفاده کرد.
           </p>
-          <p className="mt-10 mb-5 text-white text-4xl">Technologies Used</p>
+          <p className="mt-10 mb-5 text-white text-4xl">
+            تکنولژی های استفاده شده
+          </p>
           <ul className="">
             <li className="text-white flex items-center gap-2">
               <h3 className="text-xl font-semibold">TypeScript : </h3>

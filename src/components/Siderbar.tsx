@@ -8,20 +8,18 @@ const Siderbar = () => {
   const { session } = useSession();
 
   return (
-    <div className="hidden md:col-span-3 border-e border-zinc-900/70   w-full">
-      <div className="flex items-center gap-2 bg-zinc-900 py-10 px-4">
+    <div className="hidden lg:block lg:col-span-3 border-e border-primary/70 w-full">
+      <div className="flex items-center gap-2 bg-primary py-10 px-4">
         <button className="cursor-pointer text-white">
           <FaRegEdit size={28} />
         </button>
         <h2 className="leading-0 text-3xl uppercase font-semibold text-white">
-          New chat
+          گفتگوی جدید
         </h2>
       </div>
-      <div
-        className={`${session ? "" : "blur-3xl "} h-full bg-black/80 relative`}
-      >
-        <h3 className="px-4 py-5  text-2xl uppercase font-semibold text-white">
-          history
+      <div className={`${session ? "" : "blur-3xl "} h-full bg-gray  relative`}>
+        <h3 className="px-4 py-5  text-2xl uppercase font-semibold  text-primary">
+          تاریخچه
         </h3>
         {session ? (
           <ul className="flex flex-col justify-start items-start h-fit overflow-y-auto ">
@@ -42,8 +40,8 @@ const Siderbar = () => {
           </ul>
         ) : (
           <div className="absolute top-1/3 -translate-y-1/3 left-1/5 -translate-x-1/5">
-            <p className="text-white text-xl font-semibold uppercase">
-              Login for access to history
+            <p className="text-primary text-xl font-semibold uppercase">
+              ثبت نام کنید برای دسترسی به این بخش
             </p>
           </div>
         )}

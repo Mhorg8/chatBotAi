@@ -1,19 +1,26 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Links } from "react-router-dom";
 import NavMenu from "./NavMenu";
 import { useSession } from "../hooks/useSession";
 import { Avatar } from "@mui/material";
-import { deepPurple, purple } from "@mui/material/colors";
+import { deepPurple, green } from "@mui/material/colors";
 import { useState } from "react";
 import { LuLogIn, LuMenu, LuX } from "react-icons/lu";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { TOOGLE_MOBILE_MENU } from "../store/promptSlice";
 import { RootState } from "../store/store";
+import Button from "./Button";
 
 const Header = () => {
   const { session, setSession } = useSession();
-  const [isDropdownOpen, setIsDropdownOpen] = useState<Boolean>(false);
-  const isNavmenuOpen = useSelector(
-    (state: RootState) => state.prompt.isNavmenuOpen
+  const isMobileMenuOpen = useSelector(
+    (state: RootState) => state.prompt.isMoblieMenuOpen
   );
+  const [isDropdownOpen, setIsDropdownOpen] = useState<Boolean>(false);
+  const dispatch = useDispatch();
+
+  function openMobileMenu() {
+    dispatch(TOOGLE_MOBILE_MENU());
+  }
 
   function handleRemoveSession() {
     localStorage.removeItem("token");
@@ -22,11 +29,11 @@ const Header = () => {
   }
 
   return (
-    <div className="w-full bg-zinc-900 py-4 px-4 border-b border-white/20 z-50">
+    <div className="w-full bg-white  py-4 px-4 border-b border-priamry/60 z-50">
       <div className="flex items-center justify-between w-full h-full">
         <Link
           to="/"
-          className="text-2xl text-white font-black border border-purple-500 hover:bg-white hover:text-purple-500   transition-all duration-300 rounded-md p-0.5"
+          className="text-2xl text-primary font-black border border-light-green hover:bg-light-green hover:text-primary   transition-all duration-300 rounded-md p-0.5"
         >
           CHAT.AI
         </Link>
@@ -37,12 +44,12 @@ const Header = () => {
             <ul className="absolute top-full right-4 bg-white rounded-md min-h-20 w-full mt-3">
               <li
                 onClick={handleRemoveSession}
-                className="px-3 py-2 bg-purple-100 rounded-t-md hover:bg-purple-300 cursor-pointer hoverEffect"
+                className="px-3 py-2 bg-light-green  rounded-t-md hover:bg-text-primary cursor-pointer hoverEffect"
               >
                 Logout
               </li>
               <Link
-                className="px-3 py-2 bg-purple-100  hover:bg-purple-300 cursor-pointer w-full block rounded-b-md hoverEffect"
+                className="px-3 py-2 bg-light-green hover:bg-text-primary cursor-pointer w-full block rounded-b-md hoverEffect"
                 to="/setting"
               >
                 Setting
@@ -50,28 +57,21 @@ const Header = () => {
             </ul>
           )}
 
-          {session ? (
+          {session ? ( 
             <div className="flex items-center gap-3 justify-center">
-              <p className="text-white">{session.email}</p>
+              <p className="text-black">{session.email}</p>
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 className="cursor-pointer"
               >
-                <Avatar sx={{ background: deepPurple[300] }} />
+                <Avatar sx={{ background: green[700] }} />
               </button>
             </div>
           ) : (
             <div className="flex items-center gap-4">
-              <Link
-                to="/login"
-                className="p-2 rounded-md border border-purple-500 text-white hover:text-purple-500 hover:bg-white hoverEffect"
-              >
-                <LuLogIn size={24} />
-              </Link>
+              <Button link path="/login" Icon={LuLogIn}></Button>
 
-              <button className="p-2 rounded-md border border-purple-500 text-white hover:text-purple-500 hover:bg-white hoverEffect cursor-pointer">
-                {isNavmenuOpen ? <LuX size={24} /> : <LuMenu size={24} />}
-              </button>
+              <Button click={openMobileMenu} Icon={LuMenu}></Button>
             </div>
           )}
         </div>

@@ -11,3 +11,4 @@ export default async function chat(propmpt: string) {
   });
   return response.text;
 }
+

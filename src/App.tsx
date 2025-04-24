@@ -6,6 +6,7 @@ import main from "./gemini";
 import Loader from "./components/Loader";
 import { RootState } from "./store/store";
 import { ADD_NEW_PROMPT } from "./store/promptSlice";
+import { LuMic } from "react-icons/lu";
 
 function App() {
   const [havePrompt, setHavePrompt] = useState(false);
@@ -45,6 +46,10 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    localStorage.setItem("prompts", JSON.stringify(prompts));
+  }, [prompts]);
+
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     search();
@@ -64,20 +69,20 @@ function App() {
   }
 
   return (
-    <div className="col-span-12 md:col-span-9 bg-zinc-900 flex flex-col items-center justify-center h-full w-full">
-      <div className="min-h-[70dvh] w-[88dvh] bg-zinc-800/70 rounded-xl p-2 px-2 shadow-white shadow-sm">
+    <div className="col-span-12 md:col-span-9 bg-white flex flex-col items-center justify-center h-full w-full">
+      <div className="min-h-[70dvh] w-[80%] bg-gray rounded-xl p-2 px-2 shadow-white shadow-sm ">
         <div className="w-full max-h-[90%] h-[600px] flex flex-col-reverse mb-3 rounded-lg justify-start items-end p-3 overflow-y-auto">
           {loading ? (
             <Loader />
           ) : (
             <div className="min-w-[100px] h-fit max-w-fit ">
               {!havePrompt ? (
-                <p className="bg-white  p-2 rounded-md max-w-fit min-w-[100px]">
+                <p className="bg-white  p-2 rounded-md max-w-fit min-w-[100px] shadow-lg">
                   چطور می تونم کمک کنم؟
                 </p>
               ) : (
                 <div
-                  className="bg-zinc-800/70 text-white"
+                  className=" text-black shadow-lg bg-white p-2 rounded-md"
                   dangerouslySetInnerHTML={{ __html: answer }}
                 ></div>
               )}
@@ -87,7 +92,7 @@ function App() {
 
         <form
           onSubmit={handleSubmit}
-          className="h-fit w-full bg-white rounded-xl relative"
+          className="h-fit w-full bg-white rounded-xl relative "
         >
           <input
             onKeyDown={searchByEnterKey}
@@ -95,8 +100,13 @@ function App() {
             onChange={(e) => setPrompt(e.currentTarget.value)}
             placeholder="Search ..."
             type="text"
-            className="w-full bg-transparent border-0 outline-0 py-3 px-5"
+            className="w-full bg-transparent border-0 outline-0 py-3 px-5 "
           />
+          <button
+            className={`flex items-center justify-center p-2 absolute top-1 right-10 text-black  `}
+          >
+            <LuMic size={24} className="cursor-pointer hover:scale-110" />
+          </button>
           <button
             disabled={loading || prompt.length === 0}
             type="submit"

@@ -3,13 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface States {
   propmpts: string[];
   history: string[];
-  isNavmenuOpen: boolean;
+  isMoblieMenuOpen: boolean;
 }
 
 const initialState: States = {
   propmpts: [],
   history: [],
-  isNavmenuOpen: false,
+  isMoblieMenuOpen: false,
 };
 
 const promptSlice = createSlice({
@@ -20,11 +20,11 @@ const promptSlice = createSlice({
       state.propmpts = [...state.propmpts, action.payload];
       localStorage.setItem("prompts", JSON.stringify(state.propmpts));
     },
-    Toogle_MOBILE_MENU: (state) => {
-      state.isNavmenuOpen = !state.isNavmenuOpen;
+    TOOGLE_MOBILE_MENU: (state) => {
+      state.isMoblieMenuOpen = !state.isMoblieMenuOpen;
     },
   },
 });
 
-export const { ADD_NEW_PROMPT } = promptSlice.actions;
+export const { ADD_NEW_PROMPT, TOOGLE_MOBILE_MENU } = promptSlice.actions;
 export default promptSlice.reducer;

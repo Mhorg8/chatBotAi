@@ -4,15 +4,15 @@ import { NavLink } from "react-router-dom";
 
 const NavMenu = () => {
   return (
-    <ul className="flex items-center gap-3 text-white text-lg font-medium">
+    <ul className="hidden md:flex items-center gap-3 text-primary text-lg font-medium">
       {navLinks.map((item) => (
         <NavLink
           className={({ isActive, isPending }) =>
             isPending
               ? ""
               : isActive
-              ? "underline hover:text-purple-400"
-              : "hover:underline hover:text-purple-400 hoverEffect"
+              ? "underline hover:text-light-green"
+              : "hover:underline hover:text-light-green hoverEffect"
           }
           to={item.path}
           key={item.id}
