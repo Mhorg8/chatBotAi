@@ -9,6 +9,7 @@ import { Provider } from "react-redux";
 import AboutPage from "./pages/About.tsx";
 import LoginPage from "./pages/Login.tsx";
 import RegisterPage from "./pages/Register.tsx";
+import HistoryPage from "./pages/History.tsx";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
   { path: "/about", element: <AboutPage /> },
   { path: "/login", element: <LoginPage /> },
   { path: "/register", element: <RegisterPage /> },
+  { path: "/history", element: <HistoryPage /> },
 ]);
 
 createRoot(document.getElementById("root")!).render(

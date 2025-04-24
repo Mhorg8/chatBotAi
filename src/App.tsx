@@ -7,6 +7,7 @@ import Loader from "./components/Loader";
 import { RootState } from "./store/store";
 import { ADD_NEW_PROMPT } from "./store/promptSlice";
 import { LuMic } from "react-icons/lu";
+import { Conversation } from "./types";
 
 function App() {
   const [havePrompt, setHavePrompt] = useState(false);
@@ -14,6 +15,7 @@ function App() {
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
   const prompts = useSelector((state: RootState) => state.prompt.propmpts);
+  const [convesation, setConversation] = useState<Conversation[]>([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,11 +31,21 @@ function App() {
       if (response) {
         setHavePrompt(true);
 
+        // Format the response
         let formatted = response.replace(/\n/g, "<br />");
         formatted = formatted.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
 
+        // Update the state with the formatted answer
         setAnswer(formatted);
         dispatch(ADD_NEW_PROMPT(prompt));
+
+        const chat: Conversation = {
+          prompt: prompt,
+          answer: formatted,
+        };
+
+        setConversation((prev) => [...prev, chat]);
+        localStorage.setItem("conversations", JSON.stringify(convesation));
       } else {
         alert("Something went wrong, check your location");
       }

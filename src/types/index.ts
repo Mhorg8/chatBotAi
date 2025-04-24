@@ -11,3 +11,8 @@ export interface Session {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface Conversation {
+  prompt: string;
+  answer: string;
+}
